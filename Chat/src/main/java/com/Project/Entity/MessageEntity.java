@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class MessageEntity {
@@ -14,8 +16,13 @@ public class MessageEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Long senderId;
-	private Long receiverId;
+	@ManyToOne
+    @JoinColumn(name = "sender_id")
+    private UserEntity sender;
+	
+	@ManyToOne
+    @JoinColumn(name = "receiver_id")
+    private UserEntity receiver;
 	
 	private String content;
 	
@@ -29,20 +36,20 @@ public class MessageEntity {
 		this.id = id;
 	}
 
-	public Long getSenderId() {
-		return senderId;
+	public UserEntity getSender() {
+		return sender;
 	}
 
-	public void setSenderId(Long senderId) {
-		this.senderId = senderId;
+	public void setSender(UserEntity sender) {
+		this.sender = sender;
 	}
 
-	public Long getReceiverId() {
-		return receiverId;
+	public UserEntity getReceiver() {
+		return receiver;
 	}
 
-	public void setReceiverId(Long receiverId) {
-		this.receiverId = receiverId;
+	public void setReceiver(UserEntity receiver) {
+		this.receiver = receiver;
 	}
 
 	public String getContent() {
@@ -60,6 +67,8 @@ public class MessageEntity {
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
+
+	
 	
 	
 }

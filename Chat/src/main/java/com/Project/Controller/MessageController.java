@@ -27,8 +27,9 @@ public class MessageController {
 	
 	@PostMapping("/send")
 	public MessageResDTO send(@RequestBody MessageReqDTO dto) {
-		return service.sendMessage(dto);
+		return service.sendMesaage(dto);
 	}
+	
 	
 	@GetMapping("/all-chat/{sender}/{receiver}")
 	public List<MessageResDTO> allChat(@PathVariable Long sender,
